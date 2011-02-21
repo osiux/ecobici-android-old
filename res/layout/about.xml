@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+    <ImageView android:id="@+id/repsisLogo"
+               android:layout_width="fill_parent"
+               android:scaleType="fitCenter"
+               android:src="@drawable/logorepsis"
+               android:paddingBottom="20px"
+               android:paddingTop="10px" android:layout_height="wrap_content"/>
+               
+    <TextView android:text="@string/aboutText"
+              android:id="@+id/TextView01"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:textSize="15px"
+              android:typeface="monospace"
+              android:gravity="center" />
+    <TextView android:text="@string/aboutUrl"
+              android:id="@+id/aboutUrl"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:textSize="10px"
+              android:typeface="monospace"
+              android:gravity="center" />
+</LinearLayout>
