@@ -6,4 +6,8 @@
     <string name="aboutText">Creado por Repsis</string>
     <string name="aboutUrl"><a href="http://repsis.com/">http://repsis.com/</a></string>
     <string name="view_about">Acerca de</string>
+    
+    <!-- Colors definition -->
+    <color id="white" name="white">#ffffff</color>
+    <color id="black" name="black">#000000</color>
 </resources>

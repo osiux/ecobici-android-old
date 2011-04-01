@@ -30,8 +30,9 @@ public class MainActivity extends MapActivity {
 	private MapController mapController;
 	private MapView mapView;
 	private LocationManager locationManager;
-	
+	private LocationListener locationListener;
 	private int latitude, longitude;
+	
 	@Override
 	protected boolean isRouteDisplayed() {
 	    return false;
@@ -47,12 +48,17 @@ public class MainActivity extends MapActivity {
         
         mapView = (MapView) findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);
-        
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 100.0f, new GeoUpdateHandler());
 		
 		mapController = mapView.getController();
-		mapController.setCenter(new GeoPoint(19420337, -991727042));
+		GeoPoint center = new GeoPoint(19420337, -991727042);
+		mapController.animateTo(center);
+		mapView.invalidate();
+        
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        
+        locationListener = new GeoUpdateHandler();
+        
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 		
 		List<Overlay> mapOverlays = mapView.getOverlays();
 		Drawable drawable = this.getResources().getDrawable(R.drawable.bike_icon);
@@ -71,7 +77,7 @@ public class MainActivity extends MapActivity {
 			int latitude = (int) (station[i].latitude * 1E6);
 			int longitude = (int) (station[i].longitude * 1E6);
 			GeoPoint point = new GeoPoint(latitude, longitude);
-			OverlayItem overlayitem = new 	OverlayItem(point, station[i].address, "");
+			OverlayItem overlayitem = new OverlayItem(point, station[i].id, station[i].address);
 			itemizedoverlay.addOverlay(overlayitem);
 		}
 		mapOverlays.add(itemizedoverlay);
@@ -90,13 +96,14 @@ public class MainActivity extends MapActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
-    		case R.id.openAbout:
+    		case R.id.openAboutWindow:
     			ShowAboutWindow();
     			break;
     	}
     	
     	return true;
     }
+    
     protected void ShowAboutWindow() {
     	Intent aboutWindowScreen = new Intent(this, About.class);
     	startActivity(aboutWindowScreen);
@@ -119,10 +126,11 @@ public class MainActivity extends MapActivity {
 			latitude = (int) (location.getLatitude() * 1E6);
 			longitude = (int) (location.getLongitude() * 1E6);
 			
-			GeoPoint center = new GeoPoint(latitude, longitude);
+			GeoPoint me = new GeoPoint(latitude, longitude);
 			
-			mapController.setCenter(center);
+			mapController.animateTo(me);
 			mapController.setZoom(16);
+			mapView.invalidate();
 		}
     }
 }

@@ -23,7 +23,6 @@ public class Ecobici {
 		     URLConnection connection = url.openConnection();
 		     InputStream inputStream = connection.getInputStream();
 		     BufferedInputStream bufferedInput = new BufferedInputStream(inputStream);
-		     
 		     // Read the response into a byte array
 		     ByteArrayBuffer byteArray = new ByteArrayBuffer(50);
 		     int current = 0;

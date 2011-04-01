@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:background="@color/white">
 
     <ImageView android:id="@+id/repsisLogo"
                android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
                android:scaleType="fitCenter"
                android:src="@drawable/logorepsis"
                android:paddingBottom="20px"
-               android:paddingTop="10px" android:layout_height="wrap_content"/>
+               android:paddingTop="10px" />
                
     <TextView android:text="@string/aboutText"
               android:id="@+id/TextView01"
@@ -17,12 +19,14 @@
               android:layout_height="wrap_content"
               android:textSize="15px"
               android:typeface="monospace"
-              android:gravity="center" />
+              android:gravity="center"
+              android:textColor="@color/black" />
     <TextView android:text="@string/aboutUrl"
               android:id="@+id/aboutUrl"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:textSize="10px"
               android:typeface="monospace"
-              android:gravity="center" />
+              android:gravity="center"
+              android:textColor="@color/black" />
 </LinearLayout>
