@@ -29,4 +29,13 @@
               android:typeface="monospace"
               android:gravity="center"
               android:textColor="@color/black" />
+
+    <TextView android:text="@string/facebookUrl"
+              android:id="@+id/facebookUrl"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:textSize="10px"
+              android:typeface="monospace"
+              android:gravity="center"
+              android:textColor="@color/black" />
 </LinearLayout>

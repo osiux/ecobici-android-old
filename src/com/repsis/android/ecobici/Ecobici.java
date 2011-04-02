@@ -13,7 +13,7 @@ public class Ecobici {
 	
 	public static String getStations() {
 		// The data that is retrieved 
-		String result = null;
+		String result = "error";
 		
 		try {
 		     // This assumes that you have a URL from which the response will come
@@ -35,14 +35,14 @@ public class Ecobici {
 		} catch (Exception e) {
 			return "error";
 		}
-		
+
 		// Handle the result
 		return result;
 	}
 	
 	public static String getStationInfo(String stationId) {
 		// The data that is retrieved 
-		String result = null;
+		String result = "error";
 		
 		try {
 		     // This assumes that you have a URL from which the response will come

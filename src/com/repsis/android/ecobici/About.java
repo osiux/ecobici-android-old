@@ -13,5 +13,8 @@ public class About extends Activity {
         
         TextView repsisUrl = (TextView) findViewById(R.id.aboutUrl);
         repsisUrl.setMovementMethod(LinkMovementMethod.getInstance());
+        
+        TextView facebookUrl = (TextView) findViewById(R.id.facebookUrl);
+        facebookUrl.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="app_name">Ecobici</string>
+    <string name="loadStationsText">Cargar Estaciones</string>
+    <string name="aboutTitleText">Acerca de</string>
+    <string name="aboutText">Creado por Repsis</string>
+    <string name="aboutUrl"><a href="http://repsis.com/">http://repsis.com/</a></string>
+    <string name="view_about">Acerca de</string>
+    <string name="facebookUrl"><a href="http://facebook.com/RepsisMX">http://facebook.com/RepsisMX/</a></string>
+    <string name="loadingText">Obteniendo información</string>
+    <string name="loadingTitle">Espera...</string>
+    <string name="infoBikes">Bicicletas</string>
+    <string name="infoParking">Espacios</string>
+    <string name="loadingStationError">Imposible obtener las estaciones por el momento.</string>
+    <string name="loadingStationInfoError">Imposible obtener la información por el momento.</string>
+    <!-- Colors definition -->
+    <color id="white" name="white">#ffffff</color>
+    <color id="black" name="black">#000000</color>
+</resources>

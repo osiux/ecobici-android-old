@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
@@ -20,8 +21,7 @@ public class StationOverlay extends ItemizedOverlay<OverlayItem> implements Runn
 	private Context mContext;
 	private String stationId;
 	private String stationName;
-	private String stationBikes;
-	private String stationParking;
+	private String stationInfo;
 	private ProgressDialog pd;
 
 	public StationOverlay(Drawable defaultMarker, Context context) {
@@ -48,9 +48,10 @@ public class StationOverlay extends ItemizedOverlay<OverlayItem> implements Runn
 	protected boolean onTap(int index) {
 		OverlayItem item = mOverlays.get(index);
 		stationId = item.getTitle();
+
 		stationName = StringEscapeUtils.unescapeHtml(item.getSnippet());
 		
-		pd = ProgressDialog.show(mContext, "Espera..", "Obteniendo informacion", true, false);
+		pd = ProgressDialog.show(mContext, mContext.getString(R.string.loadingTitle), mContext.getString(R.string.loadingText), true, false);
 
 		Thread thread = new Thread(this);
 		thread.start();
@@ -58,13 +59,7 @@ public class StationOverlay extends ItemizedOverlay<OverlayItem> implements Runn
 	}
 
 	public void run() {
-		String stationInfo = Ecobici.getStationInfo(stationId);
-		
-		Gson json = new Gson();
-		Station station = json.fromJson(stationInfo, Station.class);
-		
-		stationParking = station.parking;
-		stationBikes = station.bikes;
+		stationInfo = Ecobici.getStationInfo(stationId);
 		
 		handler.sendEmptyMessage(0);
 	}
@@ -74,14 +69,25 @@ public class StationOverlay extends ItemizedOverlay<OverlayItem> implements Runn
 		public void handleMessage(Message msg) {
 			pd.dismiss();
 			
-			AlertDialog.Builder b = new AlertDialog.Builder(mContext);
-			b.setMessage("Bicicletas: " + stationBikes + "\nEspacios: " + stationParking).setTitle(stationName).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				public void onClick(DialogInterface arg0, int arg1) {
-					arg0.cancel();
-				}
-			});
-			AlertDialog info = b.create();
-			info.show();
+			if (stationInfo == "error" || stationInfo == "" || stationInfo == "[]") {
+				Toast.makeText(mContext, mContext.getString(R.string.loadingStationInfoError), Toast.LENGTH_LONG).show();
+			}else{
+				Gson json = new Gson();
+				Station station = json.fromJson(stationInfo, Station.class);
+				
+				String stationParking = station.parking;
+				String stationBikes = station.bikes;
+				
+				AlertDialog.Builder b = new AlertDialog.Builder(mContext);
+				b.setMessage(mContext.getString(R.string.infoBikes) + ": " + stationBikes + "\n" + mContext.getString(R.string.infoParking) + ": " + stationParking);
+				b.setTitle(stationName).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.cancel();
+					}
+				});
+				AlertDialog info = b.create();
+				info.show();
+			}
 		}
 	};
 }
