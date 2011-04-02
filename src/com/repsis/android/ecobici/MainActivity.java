@@ -9,9 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-/*import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;*/
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,9 +31,6 @@ import com.repsis.android.ecobici.Ecobici;
 public class MainActivity extends MapActivity implements Runnable {
 	private MapController mapController;
 	private MapView mapView;
-	/*private LocationManager locationManager;
-	private LocationListener locationListener;
-	private int latitude, longitude;*/
 	private ProgressDialog pd;
 	private static String stations;
 	private static Drawable drawable;
@@ -73,16 +67,11 @@ public class MainActivity extends MapActivity implements Runnable {
 		}
         mapView.getOverlays().add(myLocationOverlay);
         myLocationOverlay.enableCompass();
-        //myLocationOverlay.enableMyLocation();
         myLocationOverlay.runOnFirstFix(new Runnable() {
             public void run() {
                 mapController.animateTo(myLocationOverlay.getMyLocation());
             }
         });
-        
-        /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new GeoUpdateHandler();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);*/
 		
 		mapOverlays = mapView.getOverlays();
 		if (drawable == null) {
@@ -103,7 +92,6 @@ public class MainActivity extends MapActivity implements Runnable {
     
     @Override
     public void onPause() {
-		//locationManager.removeUpdates(locationListener);
 		myLocationOverlay.disableMyLocation();
 		
 		super.onPause();
@@ -111,11 +99,7 @@ public class MainActivity extends MapActivity implements Runnable {
     
     @Override   
     protected void onResume() {
-        /*locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new GeoUpdateHandler();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);*/
-		
-		myLocationOverlay.enableMyLocation();
+        myLocationOverlay.enableMyLocation();
 
         super.onResume();
     }
@@ -146,30 +130,6 @@ public class MainActivity extends MapActivity implements Runnable {
     	startActivity(aboutWindowScreen);
     }
     
-    /*public class GeoUpdateHandler implements LocationListener {
-    	public void onStatusChanged(String provider, int status, Bundle extras) {
-			// called when the provider status changes. Possible status: OUT_OF_SERVICE, TEMPORARILY_UNAVAILABLE or AVAILABLE.
-		}
-    	
-    	public void onProviderEnabled(String provider) {
-			// called when the provider is enabled by the user
-		}
-    	
-    	public void onProviderDisabled(String provider) {
-			// called when the provider is disabled by the user, if it's already disabled, it's called immediately after requestLocationUpdates
-		}
-		
-    	public void onLocationChanged(Location location) {
-			latitude = (int) (location.getLatitude() * 1E6);
-			longitude = (int) (location.getLongitude() * 1E6);
-			
-			GeoPoint me = new GeoPoint(latitude, longitude);
-			
-			mapController.animateTo(me);
-			mapView.invalidate();
-		}
-    }*/
-
 	public void run() {
 		stations = Ecobici.getStations();
 
