@@ -40,7 +40,7 @@ public class Ecobici {
 		return result;
 	}
 	
-	public static String getStationInfo(int stationId) {
+	public static String getStationInfo(String stationId) {
 		// The data that is retrieved 
 		String result = null;
 		
@@ -63,7 +63,7 @@ public class Ecobici {
 		     // Construct a String object from the byte array containing the response
 		     result = new String(byteArray.toByteArray());
 		} catch (Exception e) {
-			
+			return "error";
 		}
 		
 		// Handle the result

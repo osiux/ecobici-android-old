@@ -62,7 +62,7 @@ public class MainActivity extends MapActivity {
 		
 		List<Overlay> mapOverlays = mapView.getOverlays();
 		Drawable drawable = this.getResources().getDrawable(R.drawable.bike_icon);
-		StationOverlay itemizedoverlay = new StationOverlay(drawable, null);
+		StationOverlay itemizedoverlay = new StationOverlay(drawable, this);
 		
 		String stations = Ecobici.getStations();
 		
