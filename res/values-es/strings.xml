@@ -13,6 +13,7 @@
     <string name="infoParking">Espacios</string>
     <string name="loadingStationError">Imposible obtener las estaciones por el momento.</string>
     <string name="loadingStationInfoError">Imposible obtener la información por el momento.</string>
+    <string name="iconPhotoCredit">Icono creado de <a href="http://www.flickr.com/photos/salim/158780468/">esta foto</a>.</string>
     <!-- Colors definition -->
     <color id="white" name="white">#ffffff</color>
     <color id="black" name="black">#000000</color>

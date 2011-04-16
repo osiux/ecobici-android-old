@@ -28,8 +28,8 @@
               android:textSize="10px"
               android:typeface="monospace"
               android:gravity="center"
-              android:textColor="@color/black" />
-
+              android:textColor="@color/black"
+              android:paddingTop="5px" />
     <TextView android:text="@string/facebookUrl"
               android:id="@+id/facebookUrl"
               android:layout_width="fill_parent"
@@ -37,5 +37,15 @@
               android:textSize="10px"
               android:typeface="monospace"
               android:gravity="center"
-              android:textColor="@color/black" />
+              android:textColor="@color/black"
+              android:paddingTop="5px" />
+    <TextView android:text="@string/iconPhotoCredit"
+              android:id="@+id/iconPhotoCredit"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:textSize="10px"
+              android:typeface="monospace"
+              android:gravity="center"
+              android:textColor="@color/black"
+              android:paddingTop="10px" />
 </LinearLayout>

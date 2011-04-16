@@ -16,5 +16,8 @@ public class About extends Activity {
         
         TextView facebookUrl = (TextView) findViewById(R.id.facebookUrl);
         facebookUrl.setMovementMethod(LinkMovementMethod.getInstance());
+        
+        TextView iconPhotoCredit = (TextView) findViewById(R.id.iconPhotoCredit);
+        iconPhotoCredit.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 }

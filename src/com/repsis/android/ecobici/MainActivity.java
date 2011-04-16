@@ -37,7 +37,7 @@ public class MainActivity extends MapActivity implements Runnable {
 	private static StationOverlay itemizedoverlay;
 	private static MyLocationOverlay myLocationOverlay;
 	List<Overlay> mapOverlays;
-	private static Context myContext;
+	private Context myContext;
 	
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -50,9 +50,7 @@ public class MainActivity extends MapActivity implements Runnable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        if (myContext == null) {
-        	myContext = this;
-        }
+        myContext = this;
         
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);	
         
@@ -78,14 +76,24 @@ public class MainActivity extends MapActivity implements Runnable {
 			drawable = this.getResources().getDrawable(R.drawable.bike_icon);
 		}
 		
-		if (itemizedoverlay == null) {
-			itemizedoverlay = new StationOverlay(drawable, this);
-			
+		itemizedoverlay = new StationOverlay(drawable, this);
+		
+		if (stations == null || stations == "error" || stations == "" || stations == "[]") {
 			pd = ProgressDialog.show(this, this.getString(R.string.loadingTitle), this.getString(R.string.loadingText), true, false);
 
 			Thread thread = new Thread(this);
 			thread.start();
 		}else{
+			Gson json = new Gson();
+			Stations[] station = json.fromJson(stations, Stations[].class);
+			
+			for (int i = 0; i < station.length; i++) {
+				int latitude = (int) (station[i].latitude * 1E6);
+				int longitude = (int) (station[i].longitude * 1E6);
+				GeoPoint point = new GeoPoint(latitude, longitude);
+				OverlayItem overlayitem = new OverlayItem(point, station[i].id, station[i].address);
+				itemizedoverlay.addOverlay(overlayitem);
+			}
 			mapOverlays.add(itemizedoverlay);
 		}
     }
@@ -131,7 +139,9 @@ public class MainActivity extends MapActivity implements Runnable {
     }
     
 	public void run() {
-		stations = Ecobici.getStations();
+		if (stations == null || stations == "error" || stations == "" || stations == "[]") {
+			stations = Ecobici.getStations();
+		}
 
 		handler.sendEmptyMessage(0);
 	}

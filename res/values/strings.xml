@@ -13,6 +13,7 @@
     <string name="infoParking">Free Spaces</string>
     <string name="loadingStationError">Stations not available at this time.</string>
     <string name="loadingStationInfoError">Information not available at this time.</string>
+    <string name="iconPhotoCredit">Icon created from <a href="http://www.flickr.com/photos/salim/158780468/">this picture</a>.</string>
     <!-- Colors definition -->
     <color id="white" name="white">#ffffff</color>
     <color id="black" name="black">#000000</color>
